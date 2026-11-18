@@ -1,0 +1,59 @@
+{
+  "source_archive": "C:\\Users\\cheth\\Downloads\\Student folder.zip",
+  "archive_sha256": "4804b0399d1d56f4844b9c74e2f998aae0a281fb5947a1f47ad1bd013214d248",
+  "partition_scanned": "train only",
+  "trip_count": 80,
+  "file_counts": {
+    ".track": 80,
+    ".nodes": 80,
+    ".arcs": 80,
+    ".route": 80
+  },
+  "table_rows": {
+    ".track": 208417,
+    ".nodes": 1933485,
+    ".arcs": 3876904,
+    ".route": 31336
+  },
+  "observed_shape_signatures": {
+    ".track": [
+      [
+        3
+      ]
+    ],
+    ".nodes": [
+      [
+        2
+      ]
+    ],
+    ".arcs": [
+      [
+        2
+      ]
+    ],
+    ".route": [
+      []
+    ]
+  },
+  "observed_dtypes": {
+    ".track": [
+      "float64"
+    ],
+    ".nodes": [
+      "float64"
+    ],
+    ".arcs": [
+      "int64"
+    ],
+    ".route": [
+      "int64"
+    ]
+  },
+  "invalid_or_malformed_trip_ids": [],
+  "timestamp_intervals": 208337,
+  "nonpositive_timestamp_intervals": 0,
+  "exactly_one_second_intervals": 201053,
+  "max_interval_seconds": 153064.0,
+  "duplicate_track_rows": 0,
+  "timestamp_origin_interpretation": "Documentation specifies seconds; it does not specify Unix epoch/timezone. The pipeline uses timestamp differences as elapsed seconds."
+}

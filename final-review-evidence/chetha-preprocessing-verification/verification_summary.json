@@ -1,0 +1,31 @@
+{
+  "archive_sha256": "4804b0399d1d56f4844b9c74e2f998aae0a281fb5947a1f47ad1bd013214d248",
+  "partition_scanned": "train only",
+  "training_trips": 80,
+  "gps_observations": 208417,
+  "accepted_reference_proxy_labels": 132596,
+  "label_coverage_fraction": 0.6362052999515395,
+  "label_coverage_percent": 63.620529995153944,
+  "candidate_misses_on_accepted_labels": 520,
+  "candidate_recall_fraction": 0.9960783130712842,
+  "candidate_recall_percent": 99.60783130712842,
+  "exact_nearest_shortlist_sample_size": 480,
+  "exact_nearest_retained_count": 480,
+  "exact_nearest_sample_misses": 0,
+  "sample_method": "Six deterministic evenly-spaced observation indices per training trip, up to six when trip has fewer observations; ties within 1e-8 m treated as equal.",
+  "one_second_interval_count": 201053,
+  "timestamp_interval_count": 208337,
+  "one_second_interval_fraction": 0.96503741534149,
+  "max_timestamp_interval_seconds": 153064.0,
+  "nonpositive_timestamp_intervals": 0,
+  "duplicate_track_rows": 0,
+  "zero_length_arc_count": 100,
+  "speed_over_55_observation_count": 980,
+  "regenerated_existing_figures_byte_identical": true,
+  "figures": {
+    "distributions.png": "3855bfc2e0db91efef725a0ef404282c2117d53d5d0e1423ea6356cafe013821",
+    "track-overlay.png": "3f963b2f274559f5e91f7d3ddd9bc86e27aff971c3c93129eda69f40bc1f8ebb"
+  },
+  "tests": "py -m pytest -q: 44 passed, 1 StarletteDeprecationWarning",
+  "audit_command": "py audit_geometry.py \"$HOME\\Downloads\\Student folder.zip\" final-review-evidence/chetha-preprocessing-verification"
+}

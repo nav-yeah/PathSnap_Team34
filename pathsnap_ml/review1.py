@@ -12,6 +12,7 @@ from .data import FEATURES, SCHEMA, trips
 MODELS = ("logistic", "naive_bayes", "tree", "forest", "histogram")
 PROTOCOL = "review1-v1"
 SEED = 34
+METRICS = "review1-v1:binary-threshold-0.5;top1-accepted-including-misses;equal-fold-mean"
 
 
 def save(path, payload):
@@ -38,7 +39,7 @@ def run(archive_path, output, names):
         data = assemble(trips(archive, "train"))
     groups = data[2]
     folds = list(GroupKFold(3).split(data[0], groups=groups))
-    manifest = dict(protocol=PROTOCOL, schema=SCHEMA, archive_sha256=archive_hash,
+    manifest = dict(protocol=PROTOCOL, schema=SCHEMA, metrics=METRICS, archive_sha256=archive_hash,
                     seed=SEED, sklearn=sklearn.__version__, numpy=np.__version__,
                     validation_trips=[sorted(set(groups[valid])) for _, valid in folds])
     manifest_path = output / "manifest.json"
@@ -54,13 +55,15 @@ def run(archive_path, output, names):
                     raise ValueError("Trip leakage")
                 model, fit_s = fit(name, None, data, training)
                 per_trip = {}
-                metrics = evaluate(model, data, validation, by_trip=per_trip)
+                conditions = {}
+                metrics = evaluate(model, data, validation, by_trip=per_trip,
+                                   by_condition=conditions)
                 records.append(dict(split_id=f"fold-{number}", fit_s=fit_s,
                                     training_trips=len(set(groups[training])),
                                     validation_trips=len(set(groups[validation])),
                                     accepted=metrics["confident"],
                                     excluded=metrics["observations"] - metrics["confident"],
-                                    metrics=metrics, per_trip=per_trip))
+                                    metrics=metrics, per_trip=per_trip, conditions=conditions))
             model, full_fit_s = fit(name, None, data, np.arange(len(groups)))
             artifact_path = output / f"{name}.joblib"
             parameters = model.steps[-1][1].get_params()
@@ -78,25 +81,36 @@ def run(archive_path, output, names):
                                               folds=records, reference_free_reload_verified=True))
 
 
-def compare(folder):
+def compare(folder, submissions=()):
+    from .validation import validate_manifest, validate_result
+
     results = {}
-    manifest = read(folder / "manifest.json") if (folder / "manifest.json").exists() else None
+    manifest = None
+    paths = {}
+    for directory in (folder, *submissions):
+        candidate = directory / "manifest.json"
+        if candidate.exists():
+            submitted = validate_manifest(read(candidate))
+            if manifest is not None and submitted != manifest:
+                raise ValueError(f"Incompatible manifest: {candidate}")
+            manifest = submitted
+        for name in MODELS:
+            path = directory / f"{name}.json"
+            if path.exists():
+                if not candidate.exists() or name in paths:
+                    raise ValueError(f"Missing manifest or duplicate submission: {path}")
+                paths[name] = path
     for name in MODELS:
-        path = folder / f"{name}.json"
-        if not path.exists():
+        if name not in paths:
             results[name] = {"status": "pending"}
             continue
-        record = read(path)
-        if manifest is None or record["manifest"] != manifest or record["model"] != name:
-            raise ValueError(f"Incompatible result: {path}")
-        folds = record["folds"]
-        if [fold["split_id"] for fold in folds] != ["fold-0", "fold-1", "fold-2"]:
-            raise ValueError(f"Invalid fold IDs: {path}")
+        folds = validate_result(read(paths[name]), manifest, name)
         results[name] = {"status": "measured", **{
             metric: float(np.mean([fold["metrics"][metric] for fold in folds]))
             for metric in ("accuracy", "precision", "recall", "macro_f1", "top1",
                            "candidate_recall", "miss_rate", "coverage", "predict_s")
-        }, "mean_fit_s": float(np.mean([fold["fit_s"] for fold in folds]))}
+        }, "top1_fold_sd": float(np.std([fold["metrics"]["top1"] for fold in folds])),
+                        "mean_fit_s": float(np.mean([fold["fit_s"] for fold in folds]))}
     return results
 
 
@@ -110,8 +124,9 @@ if __name__ == "__main__":
                           default=["logistic", "naive_bayes"])
     comparison = commands.add_parser("compare")
     comparison.add_argument("folder", type=Path)
+    comparison.add_argument("submissions", nargs="*", type=Path)
     args = parser.parse_args()
     if args.command == "train":
         run(args.archive, args.output, args.models)
     else:
-        print(json.dumps(compare(args.folder), indent=2))
+        print(json.dumps(compare(args.folder, args.submissions), indent=2))

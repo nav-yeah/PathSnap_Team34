@@ -56,10 +56,10 @@ Error codes: `404` unknown trip, `422` malformed id / extra fields / corrupt tri
 
 The team selected `HistGradientBoostingClassifier` (Review 1 comparison). The API is model-agnostic: anything following the `pathsnap-ml-v1` contract loads. Swapping models means changing the artifact file, not the code.
 
-**Install the final artifact** (Chhavi's tuned model once Bayesian optimisation is done; until then the untuned Review 1 baseline):
+**Install the exact frozen artifact.** Nested tuning did not improve held-out outer-fold Top-1, so use the team-verified baseline refit, not a new model. The required SHA-256 is `9c2acba05bfa1922a412152525dfee624e67ca0845de62c262a424b56d9579a7`.
 
 ```powershell
-python deploy/promote_model.py <path\to\histogram-or-tuned.joblib> --dest artifacts\model.joblib
+python deploy/promote_model.py C:\trusted\model.joblib --dest artifacts\model.joblib
 ```
 
 The script refuses the artifact if it isn't Histogram Gradient Boosting, if its schema or features differ, if scikit-learn reports a version mismatch with the training laptop, or if it can't score a candidate row through the same `predict()` the API uses. It prints the SHA-256 fingerprint.
@@ -71,13 +71,13 @@ The script refuses the artifact if it isn't Histogram Gradient Boosting, if its 
 | family / estimator | Histogram Gradient Boosting / `HistGradientBoostingClassifier` |
 | key_parameters | `learning_rate=0.1, max_iter=70, max_leaf_nodes=31, min_samples_leaf=20, l2_regularization=0.0` |
 | fitted_iterations | boosting rounds actually fitted (early stopping can stop before `max_iter`) |
-| sha256 | fingerprint of the loaded `.joblib`. Compare with the committed file to show the demo uses it |
+| sha256 | fingerprint of the loaded `.joblib`. Compare with the verified digest above |
 | version_warnings | scikit-learn version mismatches detected while unpickling (should be empty) |
 
 Notes:
 * `early_stopping="auto"` turns on for more than 10,000 rows, holding out 10% of the training rows internally. Report `fitted_iterations` alongside `max_iter`.
 * HGB scores are independent per candidate (not normalised within a GPS point). The HMM should treat them as described in `pathsnap_ml/README.md` (clip, then log).
-* The deliverables ask for saved model weights in the repo. The baseline HGB artifact is about 125 KB, so committing the final one (e.g. `git add -f models/final/model.joblib`) is cheap.
+* Deliverables p. 2 calls for saved weights in GitHub. Obtain approval to publish this exact file at `artifacts/model.joblib`; until then, use the trusted private handoff.
 
 ## Decoder plug-in (for Navya's HMM/Viterbi)
 
@@ -89,7 +89,7 @@ def decode(scores, candidate_arcs, context) -> np.ndarray:   # shape (N,), int a
     # context.points_m / starts_m / ends_m: trip-local metres (same frame as candidates)
 ```
 
-Start the API with `PATHSNAP_DECODER=src.decoder.hmm:decode` (any importable path). The response then reports both decoded and classifier-only Top-1, which is the comparison the report asks for. A decoder that returns the wrong shape or out-of-range arc ids gives a 500 with a clear message; it does not crash the server.
+Start the API with `PATHSNAP_DECODER=pathsnap_ml.viterbi:decode` (any importable path). The response then reports both decoded and classifier-only Top-1, which is the comparison the report asks for. A decoder that returns the wrong shape or out-of-range arc ids gives a 500 with a clear message; it does not crash the server.
 
 ## Demo-day runbook
 
@@ -107,7 +107,7 @@ python -m venv .venv; .\.venv\Scripts\Activate.ps1
 python -m pip install -r api/requirements.txt
 # put the final artifact at artifacts\model.joblib and the 10 evaluation trips in a folder
 .\deploy\open_firewall.ps1               # once, in an Administrator PowerShell
-.\deploy\run_api.ps1 -Model artifacts\model.joblib -Trips "C:\PathSnap\eval_trips" -Decoder src.decoder.hmm:decode
+.\deploy\run_api.ps1 -Model artifacts\model.joblib -Trips "C:\PathSnap\eval_trips" -Decoder pathsnap_ml.viterbi:decode
 ```
 
 The script prints Laptop 1's IPv4 addresses. Keep this window visible: every request is logged with client IP, trip, Top-1, continuity and latency. Evaluators want to see these logs.
@@ -129,7 +129,7 @@ macOS/Linux equivalents: `deploy/run_api.sh MODEL TRIPS_DIR [DECODER]`, `deploy/
 |---|---|
 | UI: "Cannot reach the API" | uvicorn must use `--host 0.0.0.0` (the scripts do). Both laptops on the same Wi-Fi / hotspot. Test `http://<ip>:8000/health` in Laptop 2's browser |
 | UI: "Timed out connecting" | Windows firewall: run `open_firewall.ps1`; network profile must be *Private*. Campus Wi-Fi often blocks client-to-client traffic: use a phone hotspot |
-| `/health` degraded, "Incompatible artifact schema" | Artifact built with a different feature schema; retrain with the shared `pathsnap_ml` code |
+| `/health` degraded, "Incompatible artifact schema" | Artifact built with a different feature schema; restore the approved frozen artifact and use the pinned dependencies |
 | `/health` degraded, unpickling error | scikit-learn version differs from the training laptop; install `pathsnap_ml/requirements.txt` exactly |
 | `trips_available: 0` | `PATHSNAP_TRIPS_DIR` must contain `<trip_id>/<trip_id>.track/.nodes/.arcs` folders |
 

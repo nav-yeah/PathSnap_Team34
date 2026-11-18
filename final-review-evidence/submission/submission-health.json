@@ -1,0 +1,36 @@
+{
+  "status": "ok",
+  "model_loaded": true,
+  "model_version": "histogram-final-v1",
+  "model_error": null,
+  "model": {
+    "version": "histogram-final-v1",
+    "family": "Histogram Gradient Boosting",
+    "estimator": "HistGradientBoostingClassifier",
+    "key_parameters": {
+      "learning_rate": 0.1,
+      "max_iter": 70,
+      "max_leaf_nodes": 31,
+      "max_depth": null,
+      "min_samples_leaf": 20,
+      "l2_regularization": 0.0,
+      "early_stopping": "auto"
+    },
+    "fitted_iterations": 70,
+    "schema": "pathsnap-ml-v1",
+    "features": [
+      "distance_m",
+      "heading_cos",
+      "fraction",
+      "length_m",
+      "speed_mps"
+    ],
+    "sha256": "9c2acba05bfa1922a412152525dfee624e67ca0845de62c262a424b56d9579a7",
+    "size_bytes": 126957,
+    "sklearn_runtime": "1.9.1",
+    "sklearn_trained": "1.9.1",
+    "version_warnings": []
+  },
+  "decoder": "pathsnap_ml.viterbi:decode",
+  "trips_available": 10
+}

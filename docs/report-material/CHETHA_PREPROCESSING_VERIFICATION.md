@@ -83,13 +83,13 @@ The high-speed count is descriptive only. The candidate pipeline does not automa
 
 ## 8. Figures and tests
 
-I reran the existing `audit_geometry.py` on the training archive into `final-review-evidence/chetha-preprocessing-verification/`. Its `distributions.png` and `track-overlay.png` are byte-identical to the committed figures in `final-review-evidence/`; no figure was replaced. Their content is generated from nearest-candidate distance, speed, heading cosine, accepted/excluded proxy counts, per-trip coverage, candidate recall and the first training trip's local network overlay. The regenerated files and hashes are in the audit evidence folder.
+I reran the existing `scripts/data/audit_geometry.py` on the training archive into `results/final/evidence/chetha-preprocessing-verification/` (the committed output; use a new output directory when reproducing). Its `distributions.png` and `track-overlay.png` are byte-identical to the committed figures in `results/final/evidence/`; no figure was replaced. Their content is generated from nearest-candidate distance, speed, heading cosine, accepted/excluded proxy counts, per-trip coverage, candidate recall and the first training trip's local network overlay. The regenerated files and hashes are in the audit evidence folder.
 
 The full project suite was run after installing the repository's pinned test dependencies from `requirements-dev.txt`:
 
 ```text
 py -m pytest -q
-44 passed, 1 warning in 8.78s
+47 passed in 18.62s (latest recorded full-suite run)
 ```
 
 The warning is a Starlette deprecation notice for `httpx` integration in the API test client. No test failed. No implementation fix was required.
@@ -110,7 +110,7 @@ The warning is a Starlette deprecation notice for `httpx` integration in the API
 From the repository root:
 
 ```powershell
-py audit_geometry.py "$HOME\Downloads\Student folder.zip" final-review-evidence/chetha-preprocessing-verification
+py -m scripts.data.audit_geometry "$HOME\Downloads\Student folder.zip" results/final/evidence/chetha-preprocessing-verification-rerun
 py -m pytest -q
 ```
 

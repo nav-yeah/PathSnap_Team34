@@ -1,10 +1,13 @@
 # PathSnap ML lead handoff
 
+> Historical engineering handoff. Its original Review 1 status and evaluator availability statements predate the final merged implementation; use the root README and current checklists for final status.
+
+
 **Owner:** Chhavi Siddarth Wadhwa (PES1UG24CS132). Shared ML protocol, Logistic Regression and Gaussian Naive Bayes, baseline integration, nested histogram tuning, frozen classifier and evaluation evidence are complete. This is an engineering handoff, not submission prose.
 
 ## Evidence and decisions
 
-[PR #8](https://github.com/nav-yeah/PathSnap_Team34/pull/8) preserves Aryan's deployment work; [PR #9](https://github.com/nav-yeah/PathSnap_Team34/pull/9) merged verification and [superseded PR #7](https://github.com/nav-yeah/PathSnap_Team34/pull/7)'s unique evidence. See [the validated comparison](../review1-integration/comparison.json) and [final experiment evidence](../final-review-evidence/).
+[PR #8](https://github.com/nav-yeah/PathSnap_Team34/pull/8) preserves Aryan's deployment work; [PR #9](https://github.com/nav-yeah/PathSnap_Team34/pull/9) merged verification and [superseded PR #7](https://github.com/nav-yeah/PathSnap_Team34/pull/7)'s unique evidence. See [the validated comparison](../../../results/review1/integrated/comparison.json) and [final experiment evidence](../../../results/final/evidence/).
 
 | Untuned model | Candidate accuracy | Macro F1 | Observation Top-1 |
 | --- | ---: | ---: | ---: |
@@ -34,9 +37,9 @@ py -3.12 deploy/promote_model.py C:\trusted\model.joblib
 py -3.12 -m pathsnap_ml.review1 compare C:\evidence\review1-validation tree-review1 review1-integration
 ```
 
-The first comparison directory must contain the validated Logistic Regression and Naive Bayes results and manifest; regenerate with the shared runner only if these files are missing. See [readiness steps](../FINAL-READINESS.md) for Windows startup and smoke testing. Check `/health` against the digest above.
+The first comparison directory must contain the validated Logistic Regression and Naive Bayes results and manifest; regenerate with the shared runner only if these files are missing. See [readiness steps](../../checklists/FINAL-READINESS.md) for Windows startup and smoke testing. Check `/health` against the digest above.
 
-**Closeout verification:** 42 tests passed, zero failed or skipped; one Starlette TestClient deprecation warning. The current comparator accepted all five records. Promotion copied the exact artifact and checked a reference-free score. A temporary API from merged main reported the expected SHA-256 and decoder and returned success for all ten student trips. See [closeout evidence](../final-review-evidence/closeout/). This was localhost, not a physical two-laptop test.
+**Closeout verification:** 47 tests passed in the latest recorded full-suite run, zero failed or skipped; one Starlette TestClient deprecation warning. The current comparator accepted all five records. Promotion copied the exact artifact and checked a reference-free score. A temporary API from merged main reported the expected SHA-256 and decoder and returned success for all ten student trips. See [closeout evidence](../../../results/final/evidence/closeout/). The later integrated two-laptop demonstration is documented in the final readiness checklist.
 
 ## Viva reference and remaining owners
 

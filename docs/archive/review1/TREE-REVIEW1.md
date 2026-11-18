@@ -1,5 +1,8 @@
 # Decision Tree and Random Forest — Review 1 evidence
 
+> Archived Review 1 snapshot. Some status statements and paths describe an earlier repository state; use the root README and current checklists for the final project state.
+
+
 Untuned, three-fold grouped cross-validation on all 80 training trips. Equal-weight fold means:
 
 | Model | Candidate accuracy | Macro F1 | Observation Top-1 |

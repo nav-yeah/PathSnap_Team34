@@ -39,7 +39,7 @@ Candidate recall is candidate-set coverage of accepted proxy labels, not classif
 
 ## Comparison with Chhavi's saved results
 
-The root `review1-comparison.json` lists Logistic Regression Top-1 80.34% and Gaussian Naive Bayes 79.03%. They are **not directly compared or ranked here**: the archived Chhavi/Navya `review1-results/manifest.json` lacks the metric-definition ID required by the current validator, and individual LR/GNB fold result JSONs are not present in this clone. The team README explicitly rejects those legacy manifests rather than combining them silently. The saved trip fold IDs and dataset hash do match, but the current metric-definition check cannot certify complete comparability.
+The sibling `../review1-comparison.json` lists Logistic Regression Top-1 80.34% and Gaussian Naive Bayes 79.03%. They are **not directly compared or ranked here**: the archived Chhavi/Navya `../chhavi-navya/manifest.json` lacks the metric-definition ID required by the current validator, and individual LR/GNB fold result JSONs are not present in this clone. The team README explicitly rejects those legacy manifests rather than combining them silently. The saved trip fold IDs and dataset hash do match, but the current metric-definition check cannot certify complete comparability.
 
 ## Saved evidence
 

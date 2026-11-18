@@ -79,7 +79,7 @@ The script refuses the artifact if it isn't Histogram Gradient Boosting, if its 
 Notes:
 * `early_stopping="auto"` turns on for more than 10,000 rows, holding out 10% of the training rows internally. Report `fitted_iterations` alongside `max_iter`.
 * HGB scores are independent per candidate (not normalised within a GPS point). The HMM should treat them as described in `pathsnap_ml/README.md` (clip, then log).
-* Deliverables p. 2 calls for saved weights in GitHub. Obtain approval to publish this exact file at `artifacts/model.joblib`; until then, use the trusted private handoff.
+* The verified frozen model is committed at `artifacts/model.joblib`. Confirm its SHA-256 before the demonstration; use `deploy/promote_model.py` only when installing a separately supplied trusted copy.
 
 ## Decoder plug-in (for Navya's HMM/Viterbi)
 

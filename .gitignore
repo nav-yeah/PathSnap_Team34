@@ -7,12 +7,12 @@ outputs/
 ml-run*/
 review1-results/
 *.joblib
+!/artifacts/model.joblib
 *.zip
 *.track
 *.nodes
 *.arcs
 *.route
 *.pem
-data/
-artifacts/
+/data/
 docs/evidence/

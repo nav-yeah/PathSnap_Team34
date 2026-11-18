@@ -13,3 +13,6 @@ review1-results/
 *.arcs
 *.route
 *.pem
+data/
+artifacts/
+docs/evidence/

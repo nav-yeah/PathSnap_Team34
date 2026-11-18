@@ -1,0 +1,6 @@
+# Laptop 1 (model + API). Versions match pathsnap_ml/requirements.txt so the
+# joblib artifact unpickles with the same scikit-learn it was trained with.
+-r ../pathsnap_ml/requirements.txt
+fastapi==0.163.2
+uvicorn[standard]==0.54.0
+pydantic==2.14.3

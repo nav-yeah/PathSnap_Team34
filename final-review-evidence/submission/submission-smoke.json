@@ -1,0 +1,331 @@
+{
+  "api": "http://127.0.0.1:18753",
+  "health": {
+    "status": "ok",
+    "model_loaded": true,
+    "model_version": "histogram-final-v1",
+    "model_error": null,
+    "model": {
+      "version": "histogram-final-v1",
+      "family": "Histogram Gradient Boosting",
+      "estimator": "HistGradientBoostingClassifier",
+      "key_parameters": {
+        "learning_rate": 0.1,
+        "max_iter": 70,
+        "max_leaf_nodes": 31,
+        "max_depth": null,
+        "min_samples_leaf": 20,
+        "l2_regularization": 0.0,
+        "early_stopping": "auto"
+      },
+      "fitted_iterations": 70,
+      "schema": "pathsnap-ml-v1",
+      "features": [
+        "distance_m",
+        "heading_cos",
+        "fraction",
+        "length_m",
+        "speed_mps"
+      ],
+      "sha256": "9c2acba05bfa1922a412152525dfee624e67ca0845de62c262a424b56d9579a7",
+      "size_bytes": 126957,
+      "sklearn_runtime": "1.9.1",
+      "sklearn_trained": "1.9.1",
+      "version_warnings": []
+    },
+    "decoder": "pathsnap_ml.viterbi:decode",
+    "trips_available": 10
+  },
+  "trips": [
+    {
+      "trip_id": "00000000",
+      "observations": 2503,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.981081081081081,
+        "classifier_top1_accuracy": 0.9567567567567568,
+        "candidate_recall": 0.9990990990990991,
+        "label_coverage": 0.8869356771873752,
+        "scored_observations": 2220,
+        "route_arc_precision": 0.8972972972972973,
+        "route_arc_recall": 0.9273743016759777
+      },
+      "route_quality": {
+        "continuity": 0.912621359223301,
+        "transitions": 206,
+        "disconnected_jumps": 18,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 328.1,
+        "scoring_s": 406.0,
+        "decode_s": 266.1,
+        "evaluation_s": 178.2,
+        "total_s": 1197.6
+      },
+      "rtt_ms": 1235.245699994266
+    },
+    {
+      "trip_id": "00000007",
+      "observations": 1354,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.8764705882352941,
+        "classifier_top1_accuracy": 0.9277310924369748,
+        "candidate_recall": 1.0,
+        "label_coverage": 0.8788774002954209,
+        "scored_observations": 1190,
+        "route_arc_precision": 0.975609756097561,
+        "route_arc_recall": 0.975609756097561
+      },
+      "route_quality": {
+        "continuity": 0.9918032786885246,
+        "transitions": 122,
+        "disconnected_jumps": 1,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 145.6,
+        "scoring_s": 193.9,
+        "decode_s": 130.9,
+        "evaluation_s": 78.2,
+        "total_s": 557.6
+      },
+      "rtt_ms": 582.7114999992773
+    },
+    {
+      "trip_id": "00000009",
+      "observations": 1049,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.8668280871670703,
+        "classifier_top1_accuracy": 0.8305084745762712,
+        "candidate_recall": 0.9830508474576272,
+        "label_coverage": 0.3937082936129647,
+        "scored_observations": 413,
+        "route_arc_precision": 0.8905852417302799,
+        "route_arc_recall": 0.8158508158508159
+      },
+      "route_quality": {
+        "continuity": 0.8126582278481013,
+        "transitions": 395,
+        "disconnected_jumps": 74,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 123.0,
+        "scoring_s": 234.0,
+        "decode_s": 125.8,
+        "evaluation_s": 106.6,
+        "total_s": 597.1
+      },
+      "rtt_ms": 629.6283000847325
+    },
+    {
+      "trip_id": "00000040",
+      "observations": 2995,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.9611928104575164,
+        "classifier_top1_accuracy": 0.9101307189542484,
+        "candidate_recall": 1.0,
+        "label_coverage": 0.8173622704507513,
+        "scored_observations": 2448,
+        "route_arc_precision": 0.9771241830065359,
+        "route_arc_recall": 0.9676375404530745
+      },
+      "route_quality": {
+        "continuity": 0.9597701149425287,
+        "transitions": 348,
+        "disconnected_jumps": 14,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 454.4,
+        "scoring_s": 729.0,
+        "decode_s": 554.4,
+        "evaluation_s": 498.6,
+        "total_s": 2257.1
+      },
+      "rtt_ms": 2300.448999973014
+    },
+    {
+      "trip_id": "00000052",
+      "observations": 262,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 1.0,
+        "classifier_top1_accuracy": 0.9942196531791907,
+        "candidate_recall": 1.0,
+        "label_coverage": 0.6603053435114504,
+        "scored_observations": 173,
+        "route_arc_precision": 1.0,
+        "route_arc_recall": 0.8631578947368421
+      },
+      "route_quality": {
+        "continuity": 0.8641975308641975,
+        "transitions": 81,
+        "disconnected_jumps": 11,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 52.2,
+        "scoring_s": 60.7,
+        "decode_s": 50.2,
+        "evaluation_s": 24.2,
+        "total_s": 199.1
+      },
+      "rtt_ms": 271.06479997746646
+    },
+    {
+      "trip_id": "00000056",
+      "observations": 3958,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.9752808988764045,
+        "classifier_top1_accuracy": 0.8885393258426967,
+        "candidate_recall": 1.0,
+        "label_coverage": 0.5621526023244062,
+        "scored_observations": 2225,
+        "route_arc_precision": 0.9751809720785936,
+        "route_arc_recall": 0.8829588014981273
+      },
+      "route_quality": {
+        "continuity": 0.8660049627791563,
+        "transitions": 1209,
+        "disconnected_jumps": 162,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 694.0,
+        "scoring_s": 1105.5,
+        "decode_s": 678.7,
+        "evaluation_s": 1347.5,
+        "total_s": 3853.2
+      },
+      "rtt_ms": 3940.000200062059
+    },
+    {
+      "trip_id": "00000065",
+      "observations": 768,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.9854014598540146,
+        "classifier_top1_accuracy": 0.9245742092457421,
+        "candidate_recall": 0.9975669099756691,
+        "label_coverage": 0.53515625,
+        "scored_observations": 411,
+        "route_arc_precision": 0.9219858156028369,
+        "route_arc_recall": 0.896551724137931
+      },
+      "route_quality": {
+        "continuity": 0.8627450980392157,
+        "transitions": 153,
+        "disconnected_jumps": 21,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 157.4,
+        "scoring_s": 190.0,
+        "decode_s": 145.4,
+        "evaluation_s": 82.1,
+        "total_s": 587.0
+      },
+      "rtt_ms": 645.2582000056282
+    },
+    {
+      "trip_id": "00000076",
+      "observations": 1486,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.9906291834002677,
+        "classifier_top1_accuracy": 0.8888888888888888,
+        "candidate_recall": 1.0,
+        "label_coverage": 0.5026917900403769,
+        "scored_observations": 747,
+        "route_arc_precision": 0.7989821882951654,
+        "route_arc_recall": 0.839572192513369
+      },
+      "route_quality": {
+        "continuity": 0.7855361596009975,
+        "transitions": 401,
+        "disconnected_jumps": 86,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 392.6,
+        "scoring_s": 353.7,
+        "decode_s": 380.7,
+        "evaluation_s": 216.9,
+        "total_s": 1359.1
+      },
+      "rtt_ms": 1390.7942000078037
+    },
+    {
+      "trip_id": "00000077",
+      "observations": 3911,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.7725208175624527,
+        "classifier_top1_accuracy": 0.6718395155185466,
+        "candidate_recall": 0.9977289931869796,
+        "label_coverage": 0.6755305548453081,
+        "scored_observations": 2642,
+        "route_arc_precision": 0.8,
+        "route_arc_recall": 0.9402985074626866
+      },
+      "route_quality": {
+        "continuity": 0.8600746268656716,
+        "transitions": 536,
+        "disconnected_jumps": 75,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 614.0,
+        "scoring_s": 1017.0,
+        "decode_s": 609.0,
+        "evaluation_s": 510.5,
+        "total_s": 2777.2
+      },
+      "rtt_ms": 2862.5472999410704
+    },
+    {
+      "trip_id": "00000091",
+      "observations": 874,
+      "model_version": "histogram-final-v1",
+      "decoder": "pathsnap_ml.viterbi:decode",
+      "metrics": {
+        "top1_accuracy": 0.9199255121042831,
+        "classifier_top1_accuracy": 0.8566108007448789,
+        "candidate_recall": 1.0,
+        "label_coverage": 0.61441647597254,
+        "scored_observations": 537,
+        "route_arc_precision": 0.9253731343283582,
+        "route_arc_recall": 0.8017241379310345
+      },
+      "route_quality": {
+        "continuity": 0.8544600938967136,
+        "transitions": 213,
+        "disconnected_jumps": 31,
+        "unmatched_observations": 0
+      },
+      "timings_ms": {
+        "candidates_s": 170.5,
+        "scoring_s": 204.0,
+        "decode_s": 164.4,
+        "evaluation_s": 104.2,
+        "total_s": 658.1
+      },
+      "rtt_ms": 725.001799990423
+    }
+  ]
+}

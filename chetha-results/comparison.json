@@ -1,0 +1,39 @@
+{
+  "logistic": {
+    "status": "pending"
+  },
+  "naive_bayes": {
+    "status": "pending"
+  },
+  "tree": {
+    "status": "measured",
+    "accuracy": 0.9473829828731062,
+    "precision": 0.8031761933155299,
+    "recall": 0.7667644068000273,
+    "macro_f1": 0.8770663807285879,
+    "top1": 0.8066873092272163,
+    "candidate_recall": 0.995628594939534,
+    "miss_rate": 0.0043714050604660715,
+    "coverage": 0.6363408447283647,
+    "predict_s": 0.09896330000143887,
+    "top1_fold_sd": 0.017625686861758694,
+    "mean_fit_s": 3.8468998666648986
+  },
+  "forest": {
+    "status": "measured",
+    "accuracy": 0.9488006462921912,
+    "precision": 0.8353370595863056,
+    "recall": 0.733307097750032,
+    "macro_f1": 0.8759964326360388,
+    "top1": 0.8133658079215214,
+    "candidate_recall": 0.995628594939534,
+    "miss_rate": 0.0043714050604660715,
+    "coverage": 0.6363408447283647,
+    "predict_s": 0.9213457333341163,
+    "top1_fold_sd": 0.01859305444916451,
+    "mean_fit_s": 23.19208220000049
+  },
+  "histogram": {
+    "status": "pending"
+  }
+}

@@ -10,12 +10,11 @@ import numpy as np
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from pathsnap_ml.inference import load
-
 from . import pipeline
 from .config import Settings
 from .decoders import resolve
 from .evaluation import ReferenceStore, score
+from .model_info import load_with_info
 from .schemas import Health, PredictRequest, PredictResponse, TripSummary
 from .trip_store import InvalidTripData, TripNotFound, TripStore
 
@@ -29,9 +28,9 @@ class State:
         self.trips = TripStore(settings.trips_dir)
         self.references = ReferenceStore(settings.reference_dir)
         self.decoder_name, self.decoder = resolve(settings.decoder)
-        self.artifact, self.model_error = None, None
+        self.artifact, self.model_info, self.model_error = None, None, None
         try:
-            self.artifact = load(settings.model_path)
+            self.artifact, self.model_info = load_with_info(settings.model_path)
         except FileNotFoundError:
             self.model_error = f"model artifact not found: {settings.model_path}"
         except Exception as error:  # incompatible schema, corrupt file, version mismatch
@@ -44,9 +43,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app):
         state = app.state.pathsnap = State(settings)
-        log.info("model=%s version=%s decoder=%s trips_dir=%s trips=%d",
-                 settings.model_path, state.artifact and state.artifact["version"],
+        log.info("model=%s decoder=%s trips_dir=%s trips=%d", settings.model_path,
                  state.decoder_name, settings.trips_dir, len(state.trips.trip_ids()))
+        if state.model_info:
+            info = state.model_info
+            log.info("serving %s (%s) version=%s sha256=%s params=%s", info["family"],
+                     info["estimator"], info["version"], info["sha256"][:12], info["key_parameters"])
+            for warning in info["version_warnings"]:
+                log.warning("artifact/runtime scikit-learn mismatch: %s", warning)
         if state.model_error:
             log.error(state.model_error)
         yield
@@ -73,7 +77,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         s = state(request)
         return Health(status="ok" if s.artifact else "degraded", model_loaded=s.artifact is not None,
                       model_version=s.artifact["version"] if s.artifact else None,
-                      model_error=s.model_error, decoder=s.decoder_name,
+                      model_error=s.model_error, model=s.model_info, decoder=s.decoder_name,
                       trips_available=len(s.trips.trip_ids()))
 
     @app.get("/trips", response_model=list[TripSummary])

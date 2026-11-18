@@ -11,8 +11,10 @@ REFERENCE_WORDS = ("reference", "ground_truth", "truth", "route_file", "aligned"
 
 def test_health_reports_model_decoder_and_trips(client_for):
     body = client_for().get("/health").json()
+    model = body.pop("model")
     assert body == dict(status="ok", model_loaded=True, model_version="test-logistic",
                         model_error=None, decoder="classifier_argmax", trips_available=2)
+    assert model["family"] == "Logistic Regression" and model["schema"] == "pathsnap-ml-v1"
 
 
 def test_trip_listing_contains_only_reference_free_summaries(client_for):

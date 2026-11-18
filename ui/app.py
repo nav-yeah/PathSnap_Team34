@@ -33,8 +33,15 @@ with st.sidebar:
             st.success("API connected")
         else:
             st.warning(f"API reachable but model not loaded: {health['model_error']}")
-        st.caption(f"Model: `{health['model_version']}`  \nDecoder: `{health['decoder']}`  \n"
-                   f"Trips on server: {health['trips_available']}")
+        model = health.get("model") or {}
+        if model:
+            st.markdown(f"**{model['family']}**")
+            params = ", ".join(f"{k}={v}" for k, v in model["key_parameters"].items())
+            st.caption(f"Version: `{model['version']}`  \nSHA-256: `{model['sha256'][:12]}…`  \n"
+                       f"Params: {params}")
+            for warning in model.get("version_warnings", []):
+                st.warning(f"scikit-learn mismatch: {warning}")
+        st.caption(f"Decoder: `{health['decoder']}`  \nTrips on server: {health['trips_available']}")
     except ApiError as error:
         health = None
         st.error(str(error))

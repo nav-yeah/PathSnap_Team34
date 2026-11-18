@@ -1,5 +1,8 @@
 # Review 1 validation and evidence
 
+> Archived Review 1 snapshot. Some status statements and paths describe an earlier repository state; use the root README and current checklists for the final project state.
+
+
 ```powershell
 python -m pytest pathsnap_ml/test_pipeline.py -q
 python -m pathsnap_ml.review1 train "$HOME/Downloads/Student folder.zip" review1-results

@@ -55,19 +55,19 @@ The verified archive contained 80 training trips and 208,417 GPS observations. T
 
 Of 208,337 adjacent timestamp intervals, 201,053 (96.50%) were one second within the audit tolerance. No interval was nonpositive; the largest gap was 153,064 seconds. These gaps reinforce the use of actual elapsed seconds. The audit also observed 100 zero-length road arcs. They were retained, with their geometry handled by the denominator floor described above.
 
-The training-only scan, per-trip results, archive fingerprint, denominators, and figure hashes are recorded in `final-review-evidence/chetha-preprocessing-verification/`. Student-test and evaluator data were not used to tune these preprocessing decisions or compute the statistics in this section.
+The training-only scan, per-trip results, archive fingerprint, denominators, and figure hashes are recorded in `results/final/evidence/chetha-preprocessing-verification/`. Student-test and evaluator data were not used to tune these preprocessing decisions or compute the statistics in this section.
 
 ## Figures and tests
 
 **Figure 1.** Local-plane overlay of GPS observations and the road network for a training trip. Axes are local east and north in metres.
 
-![GPS trajectory and road network in the local projection](../final-review-evidence/chetha-preprocessing-verification/track-overlay.png)
+![GPS trajectory and road network in the local projection](../../results/final/evidence/chetha-preprocessing-verification/track-overlay.png)
 
 **Figure 2.** Training-only feature distributions and proxy-label audit summaries. The accepted/excluded bars represent reference-proxy coverage; the stated candidate recall is a candidate-set measure.
 
-![Training-only candidate feature and alignment distributions](../final-review-evidence/chetha-preprocessing-verification/distributions.png)
+![Training-only candidate feature and alignment distributions](../../results/final/evidence/chetha-preprocessing-verification/distributions.png)
 
-The project test command was `py -m pytest -q`; the recorded run completed with **44 passed** and one Starlette deprecation warning. The shared pipeline tests cover repeated route arcs, skipped route steps and ambiguity rejection; reference-free candidate generation and deterministic candidate IDs; missing heading values; trip-grouped splitting; feature schema/order validation; and serialized inference behavior. The data audit also independently checks actual training-file dimensions and IDs.
+The original preprocessing audit run completed with 44 tests passed and one Starlette deprecation warning. After route stitching was merged, the full suite was run again: 47 tests passed in 18.62 seconds. The recorded log is `results/final/evidence/stitching-tests.log`. The shared pipeline tests cover repeated route arcs, skipped route steps and ambiguity rejection; reference-free candidate generation and deterministic candidate IDs; missing heading values; trip-grouped splitting; feature schema/order validation; and serialized inference behavior. The data audit also independently checks actual training-file dimensions and IDs.
 
 ## Limitations
 

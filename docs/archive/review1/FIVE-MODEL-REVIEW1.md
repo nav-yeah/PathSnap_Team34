@@ -1,5 +1,8 @@
 # Review 1 integration — engineering decision
 
+> Archived Review 1 snapshot. Some status statements and paths describe an earlier repository state; use the root README and current checklists for the final project state.
+
+
 **Provisional choice: Random Forest.** It led on the predefined mean-fold Top-1 metric by 0.085 percentage points. Histogram Gradient Boosting is a close alternative: higher candidate accuracy and macro F1, lower Top-1 fold SD, much shorter measured fit time, and comparable inference time. Runtime is indicative, not a controlled benchmark. Both models expose independent compatibility scores; neither score is a calibrated HMM likelihood. Validate downstream decoding before final selection.
 
 The independent histogram verification reproduced Navya's three original Top-1 values exactly and passed reference-free artifact reload. Navya owns the original contribution; the verified submission is separate. The new manifest matches the other four; the original was not edited. The shared validator reconciles trip membership, confusion counts and Top-1 counts, not independent label correctness.

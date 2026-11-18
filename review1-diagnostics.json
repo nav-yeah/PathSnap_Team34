@@ -1,0 +1,138 @@
+{
+  "logistic": {
+    "confusion": [
+      [
+        902048,
+        26644
+      ],
+      [
+        43116,
+        88960
+      ]
+    ],
+    "conditions": {
+      "nearest_under_10m": {
+        "observations": 161320,
+        "accepted": 114105,
+        "coverage": 0.7073208529630548,
+        "top1": 0.8138731869769072
+      },
+      "nearest_10_to_30m": {
+        "observations": 26818,
+        "accepted": 17889,
+        "coverage": 0.6670519800134238,
+        "top1": 0.7493431717815418
+      },
+      "nearest_30m_or_more": {
+        "observations": 20279,
+        "accepted": 602,
+        "coverage": 0.02968588194684156,
+        "top1": 0.5448504983388704
+      },
+      "speed_missing": {
+        "observations": 80,
+        "accepted": 62,
+        "coverage": 0.775,
+        "top1": 0.3709677419354839
+      },
+      "speed_under_2mps": {
+        "observations": 6715,
+        "accepted": 3888,
+        "coverage": 0.5790022338049143,
+        "top1": 0.5388374485596708
+      },
+      "speed_2_to_15mps": {
+        "observations": 130300,
+        "accepted": 77924,
+        "coverage": 0.5980353031465848,
+        "top1": 0.7224731789949181
+      },
+      "speed_15mps_or_more": {
+        "observations": 71322,
+        "accepted": 50722,
+        "coverage": 0.7111690642438518,
+        "top1": 0.9499625409092701
+      }
+    },
+    "fold_top1": [
+      0.8023138145119383,
+      0.829031537477408,
+      0.7788202607394743
+    ],
+    "trip_top1_quantiles": [
+      0.5195954487989887,
+      0.7504851244341205,
+      0.8639061544732016,
+      0.9289317036390333,
+      0.9879951980792316
+    ]
+  },
+  "naive_bayes": {
+    "confusion": [
+      [
+        857848,
+        70844
+      ],
+      [
+        20316,
+        111760
+      ]
+    ],
+    "conditions": {
+      "nearest_under_10m": {
+        "observations": 161320,
+        "accepted": 114105,
+        "coverage": 0.7073208529630548,
+        "top1": 0.7970290521887735
+      },
+      "nearest_10_to_30m": {
+        "observations": 26818,
+        "accepted": 17889,
+        "coverage": 0.6670519800134238,
+        "top1": 0.7539828945161832
+      },
+      "nearest_30m_or_more": {
+        "observations": 20279,
+        "accepted": 602,
+        "coverage": 0.02968588194684156,
+        "top1": 0.5863787375415282
+      },
+      "speed_missing": {
+        "observations": 80,
+        "accepted": 62,
+        "coverage": 0.775,
+        "top1": 0.3225806451612903
+      },
+      "speed_under_2mps": {
+        "observations": 6715,
+        "accepted": 3888,
+        "coverage": 0.5790022338049143,
+        "top1": 0.5203189300411523
+      },
+      "speed_2_to_15mps": {
+        "observations": 130300,
+        "accepted": 77924,
+        "coverage": 0.5980353031465848,
+        "top1": 0.7127329192546584
+      },
+      "speed_15mps_or_more": {
+        "observations": 71322,
+        "accepted": 50722,
+        "coverage": 0.7111690642438518,
+        "top1": 0.9306415362170262
+      }
+    },
+    "fold_top1": [
+      0.7960780023521046,
+      0.8110594399203948,
+      0.7638384270143193
+    ],
+    "trip_top1_quantiles": [
+      0.5221238938053098,
+      0.747366481603353,
+      0.8525132275132274,
+      0.9124198908141467,
+      0.981904761904762
+    ]
+  }
+}

@@ -7,7 +7,8 @@ import numpy as np
 
 from .data import FEATURES, SCHEMA, align, candidates
 from .inference import load, matrix, predict
-from .review1 import compare, save
+from .review1 import METRICS, PROTOCOL, SEED, compare, save
+from .validation import validate_metrics
 
 
 class PipelineTest(unittest.TestCase):
@@ -15,10 +16,21 @@ class PipelineTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             folder = Path(directory)
             self.assertEqual(compare(folder)["forest"], {"status": "pending"})
-            save(folder / "manifest.json", {"seed": 34})
+            manifest = dict(seed=SEED, schema=SCHEMA, protocol=PROTOCOL, metrics=METRICS,
+                            archive_sha256="a"*64,
+                            validation_trips=[[str(index) for index in range(start, 80, 3)]
+                                              for start in range(3)])
+            save(folder / "manifest.json", manifest)
             save(folder / "logistic.json", {"model": "logistic", "manifest": {"seed": 99}})
             with self.assertRaisesRegex(ValueError, "Incompatible result"):
                 compare(folder)
+
+    def test_rejects_impossible_top1(self):
+        metrics = dict(observations=1, confident=1, coverage=1, accuracy=1, precision=0,
+                       recall=0, macro_f1=.5, weighted_f1=1, top1=1, candidate_recall=0,
+                       miss_rate=1, brier=0, log_loss=0, confusion=[[8, 0], [0, 0]])
+        with self.assertRaisesRegex(ValueError, "Top-1"):
+            validate_metrics(metrics)
 
     def test_alignment_repeats_skips_and_ambiguity(self):
         starts = np.array([[0, 0], [100, 0], [200, 0], [0, 0]])

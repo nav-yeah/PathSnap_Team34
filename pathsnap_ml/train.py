@@ -60,7 +60,7 @@ def assemble(items):
                                   groups, trusted, hits)))
 
 
-def evaluate(model, data, indices, *, by_trip=None):
+def evaluate(model, data, indices, *, by_trip=None, by_condition=None):
     values, labels, _, trusted, hits = data
     start = time.perf_counter()
     scores = model.predict_proba(values[indices].reshape(-1, len(FEATURES)))[:, 1]
@@ -71,6 +71,19 @@ def evaluate(model, data, indices, *, by_trip=None):
         for trip in sorted(set(groups)):
             mask = groups == trip
             by_trip[trip] = score_metrics(data, indices[mask], scores[mask])
+    if by_condition is not None:
+        nearest = values[indices, 0, 0]
+        speed = values[indices, 0, 4]
+        for key, mask in {
+            "nearest_under_10m": nearest < 10,
+            "nearest_10_to_30m": (nearest >= 10) & (nearest < 30),
+            "nearest_30m_or_more": nearest >= 30,
+            "speed_missing": ~np.isfinite(speed),
+            "speed_under_2mps": speed < 2,
+            "speed_2_to_15mps": (speed >= 2) & (speed < 15),
+            "speed_15mps_or_more": speed >= 15,
+        }.items():
+            by_condition[key] = score_metrics(data, indices[mask], scores[mask])
     return score_metrics(data, indices, scores) | {"predict_s": elapsed}
 
 
@@ -86,7 +99,7 @@ def score_metrics(data, indices, scores):
     return dict(accuracy=accuracy_score(targets, predicted),
                 precision=precision_score(targets, predicted, zero_division=0),
                 recall=recall_score(targets, predicted, zero_division=0),
-                macro_f1=f1_score(targets, predicted, average="macro", zero_division=0),
+                macro_f1=f1_score(targets, predicted, labels=[0, 1], average="macro", zero_division=0),
                 weighted_f1=f1_score(targets, predicted, average="weighted"),
                 log_loss=log_loss(targets, probabilities, labels=[0, 1]),
                 brier=brier_score_loss(targets, probabilities),

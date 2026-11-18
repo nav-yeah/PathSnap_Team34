@@ -47,12 +47,13 @@ def test_response_never_contains_reference_route(client_for, dataset):
     text = json.dumps(body).lower()
     assert not any(word in text for word in REFERENCE_WORDS)
     assert set(body) == {"trip_id", "model_version", "decoder", "observations",
-                         "predicted_arc_ids", "route_arc_ids", "route_quality",
+                         "predicted_arc_ids", "route_arc_ids", "route_break_indices", "route_quality",
                          "evaluation_available", "metrics", "timings_ms", "geometry"}
     assert set(body["geometry"]) == {"gps_points", "predicted_route", "road_context"}
     assert set(body["metrics"]) == {"top1_accuracy", "classifier_top1_accuracy", "candidate_recall",
                                     "label_coverage", "scored_observations",
                                     "route_arc_precision", "route_arc_recall"}
+    assert {"inserted_bridge_arcs", "route_breaks", "gps_gap_breaks"} <= set(body["route_quality"])
 
 
 def test_prediction_is_identical_with_and_without_reference_data(client_for, tmp_path):

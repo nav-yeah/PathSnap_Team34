@@ -18,7 +18,7 @@ Owner: Aryan (Deployment Lead). Code: [`api/`](../api), [`ui/`](../ui), [`deploy
 |---|---|---|
 | GET | `/health` | Model loaded?, model version, decoder in use, number of trips |
 | GET | `/trips` | `trip_id`, observation count, duration for each available trip |
-| POST | `/predict` | Body `{"trip_id": "00000052"}`. Runs the full pipeline and returns the predicted arc per GPS point, the ordered route, route continuity, server-side metrics and map geometry |
+| POST | `/predict` | Body `{"trip_id": "00000052"}`. Returns the predicted arc per GPS point, a stitched route with explicit break indices, route continuity, server-side metrics and map geometry |
 | GET | `/docs` | Interactive OpenAPI docs (useful for the "API response" screenshot) |
 
 Error codes: `404` unknown trip, `422` malformed id / extra fields / corrupt trip files, `503` model artifact missing or incompatible, `500` pipeline or decoder failure (server stays up and logs the traceback).
@@ -41,6 +41,8 @@ Error codes: `404` unknown trip, `422` malformed id / extra fields / corrupt tri
 | Route arc precision / recall | Distinct predicted arcs vs distinct arcs in the `.route` file | yes |
 | Route continuity | Share of arc changes where the next arc's `from_node` is the previous arc's `to_node` (drivable on the directed graph) | no |
 | Disconnected jumps | Arc changes that are not connected | no |
+| Inserted bridge arcs | Shortest directed road arcs inserted between decoded observations when reachable within 2 km; never inserted across a GPS gap or unmatched observation | no |
+| Route breaks | Starts of a new route component after an unmatched observation, GPS gap or unreachable transition | no |
 
 ## Configuration (environment variables on Laptop 1)
 

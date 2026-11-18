@@ -122,9 +122,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         result.timings["evaluation_s"] = time.perf_counter() - clock
         result.timings["total_s"] = time.perf_counter() - started
 
-        route_ids = pipeline.collapse(result.decoded_arcs)
-        quality = pipeline.continuity(result.decoded_arcs, trip.arcs) | dict(
-            unmatched_observations=int((result.decoded_arcs < 0).sum()))
+        route_ids = result.stitched_route
+        quality = pipeline.stitched_continuity(route_ids, result.route_break_indices,
+                                               trip.arcs) | dict(
+            unmatched_observations=int((result.decoded_arcs < 0).sum()),
+            inserted_bridge_arcs=result.inserted_bridge_arcs,
+            route_breaks=len(result.route_break_indices), gps_gap_breaks=result.gps_gap_breaks)
         context_ids = np.unique(result.candidate_arcs)[: s.settings.max_context_arcs]
         log.info("trip=%s top1=%s classifier_top1=%s continuity=%.3f total=%.2fs",
                  trip.trip_id, _fmt(metrics, "top1_accuracy"),
@@ -133,7 +136,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return PredictResponse(
             trip_id=trip.trip_id, model_version=s.artifact["version"], decoder=s.decoder_name,
             observations=len(trip.track), predicted_arc_ids=result.decoded_arcs.tolist(),
-            route_arc_ids=route_ids, route_quality=quality,
+            route_arc_ids=route_ids, route_break_indices=result.route_break_indices,
+            route_quality=quality,
             evaluation_available=metrics is not None, metrics=metrics,
             timings_ms={k: round(v * 1000, 1) for k, v in result.timings.items()},
             geometry=dict(

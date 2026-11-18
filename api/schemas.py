@@ -61,6 +61,9 @@ class RouteQuality(BaseModel):
     transitions: int
     disconnected_jumps: int
     unmatched_observations: int
+    inserted_bridge_arcs: int
+    route_breaks: int
+    gps_gap_breaks: int
 
 
 class Geometry(BaseModel):
@@ -75,7 +78,8 @@ class PredictResponse(BaseModel):
     decoder: str
     observations: int
     predicted_arc_ids: list[int]               # one per observation, -1 = unmatched
-    route_arc_ids: list[int]                   # ordered, consecutive repeats removed
+    route_arc_ids: list[int]                   # stitched ordered route; bridge arcs included
+    route_break_indices: list[int]             # starts of route components after a break
     route_quality: RouteQuality
     evaluation_available: bool
     metrics: Optional[Metrics]

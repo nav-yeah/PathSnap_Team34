@@ -112,6 +112,8 @@ if result:
     cols[2].metric("Disconnected jumps", quality["disconnected_jumps"])
     cols[3].metric("GPS points", result["observations"])
     cols[4].metric("Server time", f"{result['timings_ms']['total_s'] / 1000:.2f} s")
+    st.caption(f"Bridge arcs added: {quality['inserted_bridge_arcs']} · Route breaks: "
+               f"{quality['route_breaks']} · GPS-gap breaks: {quality['gps_gap_breaks']}")
 
     st_folium(build_map(result), height=620, use_container_width=True, returned_objects=[],
               key=f"map-{result['trip_id']}")

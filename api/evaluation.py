@@ -10,7 +10,7 @@ import numpy as np
 
 from pathsnap_ml.data import align
 
-from .pipeline import Prediction, collapse
+from .pipeline import Prediction
 from .trip_store import TRIP_ID
 
 
@@ -41,7 +41,7 @@ def score(prediction: Prediction, route) -> dict:
         return float((arcs[accepted] == reference[accepted]).mean()) if count else None
 
     hits = (prediction.candidate_arcs == reference[:, None]).any(axis=1)
-    predicted = set(collapse(prediction.decoded_arcs))
+    predicted = set(prediction.stitched_route)
     truth = set(int(arc) for arc in route)
     overlap = len(predicted & truth)
     return dict(

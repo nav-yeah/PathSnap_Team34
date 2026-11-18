@@ -8,7 +8,7 @@
 | Folium map, API/UI and two laptops | Deliverables §§6–7, pp. 6–7; Models and Training Guidelines final evaluation, p. 6 | Aryan | HTTP smoke test plus separate physical LAN rehearsal |
 | Single report, artifacts and integrity | Deliverables §§1, 8; Assessment and Plagiarism Policy §§3–7 | Team | Technical evidence here; team writes final report independently |
 
-The documents describe workstreams rather than the four numbered phase definitions used in the request. Follow their actual requirements. Candidate metrics are not route accuracy. The decoder allows one directed bridge arc between observed states and starts a new chain when no transition is plausible. It outputs one arc per observation and does not stitch intermediate arcs into a full route. Direct adjacency is therefore stricter than bridge reachability but does not certify a reconstructed route.
+The documents describe workstreams rather than the four numbered phase definitions used in the request. Follow their actual requirements. Candidate metrics are not route accuracy. The decoder outputs one selected arc per observation. The route post-processor inserts the shortest directed bridge path (up to 2 km) between consecutive decoded arcs, but starts an explicit new route component across GPS gaps, unmatched observations, or unreachable components. Report both per-observation predictions and stitched-route metrics; inserted arcs are inferred from the graph and are not independent GPS matches. Proxy agreement and graph continuity do not establish independently verified route accuracy.
 
 ## Reproduce and rehearse
 

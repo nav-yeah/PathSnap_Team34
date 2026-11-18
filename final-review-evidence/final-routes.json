@@ -1,0 +1,273 @@
+{
+  "partition": "student_test",
+  "accepted": 13006,
+  "model": "histogram-final-v1",
+  "totals": {
+    "classifier": {
+      "top1": 0.8632169767799477,
+      "correct": 11227,
+      "transitions": 6977,
+      "direct_adjacency": 0.6958578185466533,
+      "unmatched": 0
+    },
+    "decoded": {
+      "top1": 0.9191911425495924,
+      "correct": 11955,
+      "transitions": 3664,
+      "direct_adjacency": 0.8654475982532751,
+      "unmatched": 0
+    }
+  },
+  "trips": {
+    "00000000": {
+      "observations": 2503,
+      "accepted": 2220,
+      "timings": {
+        "candidates_s": 0.3747369000921026,
+        "scoring_s": 0.6151651000836864,
+        "decode_s": 0.2993830000050366,
+        "parse_s": 0.0359168000286445,
+        "total_s": 1.3363200000021607
+      },
+      "classifier": {
+        "continuity": 0.6485714285714286,
+        "transitions": 350,
+        "disconnected_jumps": 123,
+        "correct": 2124,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.912621359223301,
+        "transitions": 206,
+        "disconnected_jumps": 18,
+        "correct": 2178,
+        "unmatched": 0
+      }
+    },
+    "00000007": {
+      "observations": 1354,
+      "accepted": 1190,
+      "timings": {
+        "candidates_s": 0.2051370000699535,
+        "scoring_s": 0.26645769993774593,
+        "decode_s": 0.16502710001077503,
+        "parse_s": 0.011556799989193678,
+        "total_s": 0.6543836999917403
+      },
+      "classifier": {
+        "continuity": 0.9693486590038314,
+        "transitions": 261,
+        "disconnected_jumps": 8,
+        "correct": 1104,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.9918032786885246,
+        "transitions": 122,
+        "disconnected_jumps": 1,
+        "correct": 1043,
+        "unmatched": 0
+      }
+    },
+    "00000009": {
+      "observations": 1049,
+      "accepted": 413,
+      "timings": {
+        "candidates_s": 0.14873370004352182,
+        "scoring_s": 0.22661429992876947,
+        "decode_s": 0.15788439998868853,
+        "parse_s": 0.020476699923165143,
+        "total_s": 0.5589791999664158
+      },
+      "classifier": {
+        "continuity": 0.6124031007751938,
+        "transitions": 516,
+        "disconnected_jumps": 200,
+        "correct": 343,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.8126582278481013,
+        "transitions": 395,
+        "disconnected_jumps": 74,
+        "correct": 358,
+        "unmatched": 0
+      }
+    },
+    "00000040": {
+      "observations": 2995,
+      "accepted": 2448,
+      "timings": {
+        "candidates_s": 0.4113857999909669,
+        "scoring_s": 0.6948709000134841,
+        "decode_s": 0.4397300999844447,
+        "parse_s": 0.0515466999495402,
+        "total_s": 1.610687299980782
+      },
+      "classifier": {
+        "continuity": 0.8050065876152833,
+        "transitions": 759,
+        "disconnected_jumps": 148,
+        "correct": 2228,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.9597701149425287,
+        "transitions": 348,
+        "disconnected_jumps": 14,
+        "correct": 2353,
+        "unmatched": 0
+      }
+    },
+    "00000052": {
+      "observations": 262,
+      "accepted": 173,
+      "timings": {
+        "candidates_s": 0.03739620000123978,
+        "scoring_s": 0.05278220004402101,
+        "decode_s": 0.03685230005066842,
+        "parse_s": 0.00692199997138232,
+        "total_s": 0.13507750001735985
+      },
+      "classifier": {
+        "continuity": 0.7125,
+        "transitions": 80,
+        "disconnected_jumps": 23,
+        "correct": 172,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.8641975308641975,
+        "transitions": 81,
+        "disconnected_jumps": 11,
+        "correct": 173,
+        "unmatched": 0
+      }
+    },
+    "00000056": {
+      "observations": 3958,
+      "accepted": 2225,
+      "timings": {
+        "candidates_s": 0.5423597999615595,
+        "scoring_s": 0.7364497999660671,
+        "decode_s": 0.5322721999837086,
+        "parse_s": 0.057083799969404936,
+        "total_s": 1.8871327999513596
+      },
+      "classifier": {
+        "continuity": 0.6006042296072508,
+        "transitions": 1655,
+        "disconnected_jumps": 661,
+        "correct": 1977,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.8660049627791563,
+        "transitions": 1209,
+        "disconnected_jumps": 162,
+        "correct": 2170,
+        "unmatched": 0
+      }
+    },
+    "00000065": {
+      "observations": 768,
+      "accepted": 411,
+      "timings": {
+        "candidates_s": 0.13301560003310442,
+        "scoring_s": 0.26304430002346635,
+        "decode_s": 0.10198889998719096,
+        "parse_s": 0.019073700066655874,
+        "total_s": 0.5202553999843076
+      },
+      "classifier": {
+        "continuity": 0.6597938144329897,
+        "transitions": 291,
+        "disconnected_jumps": 99,
+        "correct": 380,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.8627450980392157,
+        "transitions": 153,
+        "disconnected_jumps": 21,
+        "correct": 405,
+        "unmatched": 0
+      }
+    },
+    "00000076": {
+      "observations": 1486,
+      "accepted": 747,
+      "timings": {
+        "candidates_s": 0.2972529000835493,
+        "scoring_s": 0.27026280004065484,
+        "decode_s": 0.28526010003406554,
+        "parse_s": 0.11195199994836003,
+        "total_s": 0.9707805999787524
+      },
+      "classifier": {
+        "continuity": 0.5493171471927162,
+        "transitions": 659,
+        "disconnected_jumps": 297,
+        "correct": 664,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.7855361596009975,
+        "transitions": 401,
+        "disconnected_jumps": 86,
+        "correct": 740,
+        "unmatched": 0
+      }
+    },
+    "00000077": {
+      "observations": 3911,
+      "accepted": 2642,
+      "timings": {
+        "candidates_s": 0.46257360000163317,
+        "scoring_s": 0.9064202000154182,
+        "decode_s": 0.4927908999379724,
+        "parse_s": 0.021906499983742833,
+        "total_s": 1.9006765999365598
+      },
+      "classifier": {
+        "continuity": 0.7817827569410618,
+        "transitions": 2053,
+        "disconnected_jumps": 448,
+        "correct": 1775,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.8600746268656716,
+        "transitions": 536,
+        "disconnected_jumps": 75,
+        "correct": 2041,
+        "unmatched": 0
+      }
+    },
+    "00000091": {
+      "observations": 874,
+      "accepted": 537,
+      "timings": {
+        "candidates_s": 0.1399962999857962,
+        "scoring_s": 0.16972189990337938,
+        "decode_s": 0.11139309999998659,
+        "parse_s": 0.020758299971930683,
+        "total_s": 0.4469571999507025
+      },
+      "classifier": {
+        "continuity": 0.6742209631728046,
+        "transitions": 353,
+        "disconnected_jumps": 115,
+        "correct": 460,
+        "unmatched": 0
+      },
+      "decoded": {
+        "continuity": 0.8544600938967136,
+        "transitions": 213,
+        "disconnected_jumps": 31,
+        "correct": 494,
+        "unmatched": 0
+      }
+    }
+  }
+}

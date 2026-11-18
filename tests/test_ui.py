@@ -14,7 +14,11 @@ def prediction(client_for):
     return client_for().post("/predict", json={"trip_id": TRIP}).json()
 
 
-def test_client_reports_unreachable_api_clearly():
+def test_client_reports_unreachable_api_clearly(monkeypatch):
+    def refuse(*args, **kwargs):
+        raise requests.exceptions.ConnectionError("connection refused")
+
+    monkeypatch.setattr(requests, "request", refuse)
     with pytest.raises(ApiError, match="Cannot reach the API"):
         PathSnapClient("http://127.0.0.1:9", timeout=(1, 1)).health()
 

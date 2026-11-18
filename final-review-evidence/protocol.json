@@ -1,0 +1,26 @@
+{
+  "archive_sha256": "4804b0399d1d56f4844b9c74e2f998aae0a281fb5947a1f47ad1bd013214d248",
+  "seed": 34,
+  "outer": 3,
+  "inner": 2,
+  "trials_per_study": 5,
+  "startup_trials": 2,
+  "sampler": "TPE",
+  "objective": "mean accepted-observation Top-1 including candidate misses",
+  "search_space": {
+    "learning_rate": [
+      0.02,
+      0.25,
+      "log"
+    ],
+    "max_leaf_nodes": [
+      8,
+      40
+    ],
+    "l2_regularization": [
+      0.01,
+      10,
+      "log"
+    ]
+  }
+}

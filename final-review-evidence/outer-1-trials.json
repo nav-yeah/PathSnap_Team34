@@ -1,0 +1,57 @@
+[
+  {
+    "number": 0,
+    "params": {
+      "learning_rate": 0.022045943473857695,
+      "max_leaf_nodes": 33,
+      "l2_regularization": 0.018971919184565818
+    },
+    "value": 0.7971911582906578,
+    "state": "COMPLETE",
+    "seconds": 10.088021
+  },
+  {
+    "number": 1,
+    "params": {
+      "learning_rate": 0.09891367109589072,
+      "max_leaf_nodes": 8,
+      "l2_regularization": 6.433919284688803
+    },
+    "value": 0.7989172783754421,
+    "state": "COMPLETE",
+    "seconds": 8.558166
+  },
+  {
+    "number": 2,
+    "params": {
+      "learning_rate": 0.09842850669972311,
+      "max_leaf_nodes": 8,
+      "l2_regularization": 6.15844528821792
+    },
+    "value": 0.7980473721979325,
+    "state": "COMPLETE",
+    "seconds": 7.921138
+  },
+  {
+    "number": 3,
+    "params": {
+      "learning_rate": 0.24694834430241852,
+      "max_leaf_nodes": 19,
+      "l2_regularization": 0.3851044073485784
+    },
+    "value": 0.7993519679883145,
+    "state": "COMPLETE",
+    "seconds": 9.629292
+  },
+  {
+    "number": 4,
+    "params": {
+      "learning_rate": 0.24308653807037653,
+      "max_leaf_nodes": 12,
+      "l2_regularization": 0.1021287159280719
+    },
+    "value": 0.7966152263153784,
+    "state": "COMPLETE",
+    "seconds": 8.950595
+  }
+]

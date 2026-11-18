@@ -1,4 +1,4 @@
-# PathSnap — Team 34
+# PathSnap : Team 34
 
 PathSnap matches noisy GPS observations to candidate road segments, scores the candidates with a frozen Histogram Gradient Boosting classifier, and reconstructs a connected route with Viterbi decoding and directed route stitching.
 

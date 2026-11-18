@@ -1,0 +1,15 @@
+__pycache__/
+.pytest_cache/
+.venv/
+.env
+.env.*
+outputs/
+ml-run*/
+review1-results/
+*.joblib
+*.zip
+*.track
+*.nodes
+*.arcs
+*.route
+*.pem

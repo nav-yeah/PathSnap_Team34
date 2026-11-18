@@ -6,11 +6,30 @@ from pydantic import BaseModel, ConfigDict, Field
 LatLon = list[float]
 
 
+class ModelInfo(BaseModel):
+    """Which artifact is serving. Lets evaluators verify the demo uses the committed model."""
+    model_config = ConfigDict(protected_namespaces=())
+    version: str
+    family: str
+    estimator: str
+    key_parameters: dict
+    fitted_iterations: Optional[int]
+    schema_id: str = Field(alias="schema")
+    features: list[str]
+    sha256: str
+    size_bytes: int
+    sklearn_runtime: str
+    sklearn_trained: Optional[str]
+    version_warnings: list[str]
+
+
 class Health(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
     status: str
     model_loaded: bool
     model_version: Optional[str]
     model_error: Optional[str]
+    model: Optional[ModelInfo]
     decoder: str
     trips_available: int
 

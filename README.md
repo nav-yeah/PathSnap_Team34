@@ -9,5 +9,5 @@ See [ML setup and interfaces](pathsnap_ml/README.md) and [API, UI and deployment
 | `pathsnap_ml/` | Loading, alignment, candidates, features, model training/comparison, Optuna | Chhavi / Chetha |
 | `api/` | FastAPI server: trip loading, inference pipeline, decoder plug-in, server-side scoring | Aryan |
 | `ui/` | Streamlit evaluator UI and Folium route map | Aryan |
-| `deploy/` | Laptop 1 / Laptop 2 launch scripts, firewall helper, smoke test | Aryan |
+| `deploy/` | Laptop 1 / Laptop 2 launch scripts, firewall helper, smoke test, final-model promotion | Aryan |
 | `tests/` | API and UI integration tests (synthetic data) | Aryan |

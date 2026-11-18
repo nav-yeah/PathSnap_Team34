@@ -52,6 +52,33 @@ Error codes: `404` unknown trip, `422` malformed id / extra fields / corrupt tri
 | `PATHSNAP_DECODER` | `classifier_argmax` | Or `package.module:function` (the team HMM) |
 | `PATHSNAP_CORS_ORIGINS` | `*` | Comma-separated origins |
 
+## Final model: Histogram Gradient Boosting
+
+The team selected `HistGradientBoostingClassifier` (Review 1 comparison). The API is model-agnostic: anything following the `pathsnap-ml-v1` contract loads. Swapping models means changing the artifact file, not the code.
+
+**Install the final artifact** (Chhavi's tuned model once Bayesian optimisation is done; until then the untuned Review 1 baseline):
+
+```powershell
+python deploy/promote_model.py <path\to\histogram-or-tuned.joblib> --dest artifacts\model.joblib
+```
+
+The script refuses the artifact if it isn't Histogram Gradient Boosting, if its schema or features differ, if scikit-learn reports a version mismatch with the training laptop, or if it can't score a candidate row through the same `predict()` the API uses. It prints the SHA-256 fingerprint.
+
+**Proving which model is serving.** `/health`, the uvicorn startup log and the UI sidebar all show:
+
+| Field | Example (untuned baseline) |
+|---|---|
+| family / estimator | Histogram Gradient Boosting / `HistGradientBoostingClassifier` |
+| key_parameters | `learning_rate=0.1, max_iter=70, max_leaf_nodes=31, min_samples_leaf=20, l2_regularization=0.0` |
+| fitted_iterations | boosting rounds actually fitted (early stopping can stop before `max_iter`) |
+| sha256 | fingerprint of the loaded `.joblib`. Compare with the committed file to show the demo uses it |
+| version_warnings | scikit-learn version mismatches detected while unpickling (should be empty) |
+
+Notes:
+* `early_stopping="auto"` turns on for more than 10,000 rows, holding out 10% of the training rows internally. Report `fitted_iterations` alongside `max_iter`.
+* HGB scores are independent per candidate (not normalised within a GPS point). The HMM should treat them as described in `pathsnap_ml/README.md` (clip, then log).
+* The deliverables ask for saved model weights in the repo. The baseline HGB artifact is about 125 KB, so committing the final one (e.g. `git add -f models/final/model.joblib`) is cheap.
+
 ## Decoder plug-in (for Navya's HMM/Viterbi)
 
 ```python
